@@ -14,6 +14,8 @@ import AiRoutes from "./router/AiRoutes.js";
 import investmentRoutes from "./router/investment-routes.js"
 import fundingRoutes from "./router/funding-router.js";
 import farmerprofileRoutes from "./router/farmer_profile-router.js";
+import ratingRoutes from "./router/rating-router.js";
+import paypalRoutes from "./router/paypal-routes.js";
 
 dotenv.config();
 const app = express();
@@ -35,12 +37,13 @@ app.use("/api/farmer", farmerRoutes);
 app.use("/api/consumer", consumerRoutes);
 app.use("/api/crop", cropRoutes);
 app.use("/api/product", productRoutes);
-app.use("api/weather", weatherRoute);
+app.use("/api/weather", weatherRoute);
 app.use("/api/ai",AiRoutes);
 app.use("/api/invest",investmentRoutes);
 app.use("/api/funding", fundingRoutes);
 app.use("/api/farmers", farmerprofileRoutes);
-
+app.use("/api/ratings", ratingRoutes);
+app.use("/api/paypal", paypalRoutes);
 
 
 const PORT = process.env.PORT || 5000;
