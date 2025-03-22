@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaArrowLeftLong, FaTrash, FaPlus } from "react-icons/fa6";
 
-const SetupProfile = () => {
+const InvestorProfile = () => {
   const [email, setEmail] = useState("k");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -124,4 +124,4 @@ const SetupProfile = () => {
   );
 };
 
-export default SetupProfile;
+export default InvestorProfile;
