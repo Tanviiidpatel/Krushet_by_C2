@@ -3,6 +3,7 @@ import axios from "axios";
 import { AUTH_ROUTES_REGISTRAION } from "../../../../utils/constants";
 import { HOST } from "../../../../utils/constants";
 import { useNavigate } from "react-router-dom";
+import { useAppStore } from "../../../../store";
 
 
 const Signup = () => {
@@ -11,6 +12,7 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [loading,setLoading] = useState(true);
   const navigate = useNavigate();
+  const { userInfo, setUserInfo } = useAppStore();
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -23,6 +25,7 @@ const Signup = () => {
             password: password
         });
         if(res.status === 201){
+            setUserInfo(res.data);
             navigate("/investor");
         }
         console.log(res);

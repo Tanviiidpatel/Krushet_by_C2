@@ -11,11 +11,11 @@ const consumerSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
-    phone: {
+    password: {
         type: String,
         require: true,
     },
-    password: {
+    phone: {
         type: String,
         require: true,
     },

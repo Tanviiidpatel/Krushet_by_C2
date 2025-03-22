@@ -17,6 +17,7 @@ router.post("/addCrop", authMiddleware, post_product); // Only logged-in farmers
 router.post("/update",authMiddleware,update_product);
 router.get("/my-products", authMiddleware, get_product); // Get logged-in farmer's products
 router.get("/all-products", get_all_products); // Admin/public can see all products
+// router.get("get-product-by-id")
 
 // Sorting Routes
 router.get("/sort/price/asc", authMiddleware, price_sorting_ascending);

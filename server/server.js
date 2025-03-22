@@ -4,8 +4,6 @@ import dotenv from "dotenv";
 import cors from "cors";
 import multer from "multer";
 import path from "path";
-
-// Import Routes
 import farmerRoutes from "./router/farmer-router.js";
 import consumerRoutes from "./router/consumer-router.js";
 import cropRoutes from "./router/crop-router.js";
@@ -13,6 +11,7 @@ import productRoutes from "./router/post_product-router.js";
 import seedCrops from "./seed/crops.js";
 import weatherRoute from "./router/weather-router.js";
 import AiRoutes from "./router/AiRoutes.js";
+import investmentRoutes from "./router/investment-routes.js"
 import fundingRoutes from "./router/funding-router.js";
 import farmerprofileRoutes from "./router/farmer_profile-router.js";
 import ratingRoutes from "./router/rating-router.js";
@@ -40,10 +39,18 @@ app.use("/api/crop", cropRoutes);
 app.use("/api/product", productRoutes);
 app.use("/api/weather", weatherRoute);
 app.use("/api/ai",AiRoutes);
+<<<<<<< HEAD
+app.use("/api/invest",investmentRoutes);
+=======
 app.use("/api/funding", fundingRoutes);
 app.use("/api/farmers", farmerprofileRoutes);
+<<<<<<< HEAD
 app.use("/api/ratings", ratingRoutes);
 app.use("/api/paypal", paypalRoutes);
+=======
+>>>>>>> 18351500a8edb78c3d01097740e88ebd7fcb1642
+
+>>>>>>> 22793a58a2aaeb86ec6b96d9bcc2a2d40c358091
 
 
 const PORT = process.env.PORT || 5000;
