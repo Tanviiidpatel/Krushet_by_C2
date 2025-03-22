@@ -24,18 +24,9 @@ app.use(cors({
 }));
 
 app.use(express.json());
-app.use("/uploads", express.static("uploads")); // Serve images statically
+app.use("/uploads/listings",express.static("uploads/listings"));
 
-// Multer Storage Configuration
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "uploads/"); // Save files in the uploads/ directory
-    },
-    filename: (req, file, cb) => {
-        cb(null, `${Date.now()}-${file.originalname}`); // Unique file names
-    }
-});
-const upload = multer({ storage });
+
 
 // API Routes
 app.use("/api/farmer", farmerRoutes);
@@ -44,13 +35,7 @@ app.use("/api/crop", cropRoutes);
 app.use("/api/product", productRoutes);
 app.use("/api/ai",AiRoutes);
 
-// File Upload Route
-app.post("/api/upload", upload.single("image"), (req, res) => {
-    if (!req.file) {
-        return res.status(400).json({ message: "No file uploaded" });
-    }
-    res.status(200).json({ imageUrl: `/uploads/${req.file.filename}` });
-});
+
 
 const PORT = process.env.PORT || 5000;
 

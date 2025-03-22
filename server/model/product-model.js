@@ -1,33 +1,14 @@
 import mongoose from "mongoose";
 
-const productSchema = new mongoose.Schema({
-    productId: { 
-        type: mongoose.Schema.Types.ObjectId, 
-        required: true 
-    },
-    productname: {
-        type: String,
-        required: true,
-    },
-    producttype: {
-        type: String,
-        required: true,
-    },
-    productquantity: {
-        type: Number,  // Use Number for better calculations
-        required: true,
-    },
-    productprize: {
-        type: Number,  // Use Number for sorting and calculations
-        required: true,
-    },
-    farmerId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",  // Reference to the User (Farmer)
-        required: true,
-    },
-    imageUrl: { type: String, required: true },
-}, { timestamps: true });
+const ProductSchema = new mongoose.Schema({
+    productId: { type: String, required: true, unique: true }, // Ensure productId exists
+    productname: { type: String, required: true },
+    producttype: { type: String, required: true },
+    productquantity: { type: Number, required: true },
+    productprize: { type: Number, required: true }, // Ensure correct field name
+    farmerId: { type: String, required: true },
+    imageUrl: { type: String, required: true }
+});
 
-const Product = mongoose.model("Product", productSchema);
+const Product = mongoose.model("Product", ProductSchema);
 export default Product;
