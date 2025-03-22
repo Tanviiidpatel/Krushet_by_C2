@@ -11,7 +11,11 @@ import consumerRoutes from "./router/consumer-router.js";
 import cropRoutes from "./router/crop-router.js";
 import productRoutes from "./router/post_product-router.js";
 import seedCrops from "./seed/crops.js";
+<<<<<<< HEAD
 import weatherRoute from "./router/weather-router.js";
+=======
+import AiRoutes from "./router/AiRoutes.js";
+>>>>>>> b65b8a0c6ccba03eb09c3aa71dea16aa5d5bac51
 
 dotenv.config();
 const app = express();
@@ -42,7 +46,11 @@ app.use("/api/farmer", farmerRoutes);
 app.use("/api/consumer", consumerRoutes);
 app.use("/api/crop", cropRoutes);
 app.use("/api/product", productRoutes);
+<<<<<<< HEAD
 app.use("api/weather", weatherRoute);
+=======
+app.use("/api/ai",AiRoutes);
+>>>>>>> b65b8a0c6ccba03eb09c3aa71dea16aa5d5bac51
 
 // File Upload Route
 app.post("/api/upload", upload.single("image"), (req, res) => {

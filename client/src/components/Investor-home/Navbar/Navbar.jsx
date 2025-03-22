@@ -25,7 +25,7 @@ const Navbar = () => {
           </a>
         </li>
         <li>
-          <a href="#" className="text-gray-700 hover:text-blue-600">
+          <a href="/investor/investmentAi" className="text-gray-700 hover:text-blue-600">
             AI Investment Advisor
           </a>
         </li>
