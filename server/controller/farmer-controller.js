@@ -16,35 +16,35 @@ const home = async(req, res) => {
 
 const register = async(req, res) => {
     try {
-        const { username, email, phone, password } = req.body;
+        const { username, email, password } = req.body;
 
         // for existing username 
 
-        const nameExist = await User.findOne({username});
+        // const nameExist = await User.findOne({username});
 
-        if (nameExist) {
-            return res.status(400).json({ msg: "Username is already Taken by someone.Please use a diffrent user name." });
-        }
+        // if (nameExist) {
+        //     return res.status(400).json({ msg: "Username is already Taken by someone.Please use a diffrent user name." });
+        // }
 
-        // for existing email 
+        // // for existing email 
 
-        const userExist = await User.findOne({email});
+        // const userExist = await User.findOne({email});
 
-        if (userExist) {
-            return res.status(400).json({ msg: "email already exists" });
-        }
+        // if (userExist) {
+        //     return res.status(400).json({ msg: "email already exists" });
+        // }
 
         //for existing number
 
-        const noExist = await User.findOne({phone});
+        // const noExist = await User.findOne({phone});
 
-        if(noExist){
-            return res.status(400).json({ msg: "number is already registered" });
-        }
+        // if(noExist){
+        //     return res.status(400).json({ msg: "number is already registered" });
+        // }
 
-        const farmerCreated = await User.create({username, email, phone, password});
         console.log(req.body);
-        res.status(201).json({msg: "registration successfull", token: await farmerCreated.generateToken(), userId: farmerCreated._id.toString(),});
+        const farmerCreated = await User.create({username, email, password});
+        res.status(201).send("creeated succesfully");
 
 
     } catch (error) {

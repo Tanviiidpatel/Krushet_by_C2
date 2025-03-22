@@ -3,9 +3,16 @@ import connectDb from "./utils/db.js";
 import dotenv from "dotenv";
 import register from "./router/farmer-router.js";
 import login from "./router/farmer-router.js";
+import cors from "cors";
 
 dotenv.config();
 const app = express();
+
+app.use(cors({
+    origin: "*", 
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    credential: true
+}));
 
 app.use(express.json());
 

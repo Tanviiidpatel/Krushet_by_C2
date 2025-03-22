@@ -6,7 +6,7 @@ import validate from "../middleware/validate-middleware.js";
 const router = express.Router();
 
 router.route("/").get(authcontroller.home);
-router.route("/register").post(validate(signupSchema),authcontroller.register);
+router.route("/register").post(authcontroller.register);
 router.route("/login").post(validate(loginSchema),authcontroller.login);
 
 
