@@ -1,38 +1,61 @@
 import express from "express";
 import connectDb from "./utils/db.js";
 import dotenv from "dotenv";
-import register from "./router/farmer-router.js";
-import login from "./router/farmer-router.js";
 import cors from "cors";
-import c_register from "./router/consumer-router.js";
-import c_login from "./router/consumer-router.js";
-import product from "./router/product-router.js";
+import multer from "multer";
+import path from "path";
+
+// Import Routes
+import farmerRoutes from "./router/farmer-router.js";
+import consumerRoutes from "./router/consumer-router.js";
+import cropRoutes from "./router/crop-router.js";
+import productRoutes from "./router/post_product-router.js";
 import seedCrops from "./seed/crops.js";
-import crop from "./router/crop-router.js";
 
 dotenv.config();
 const app = express();
 
+// CORS Middleware
 app.use(cors({
-    origin: "*", 
+    origin: "*",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    credential: true
+    credentials: true
 }));
 
 app.use(express.json());
+app.use("/uploads", express.static("uploads")); // Serve images statically
 
-app.use("/api/register", register);
-app.use("/api/login", login);
-app.use("/api/cregister",c_register);
-app.use("/api/clogin",c_login);
-app.use("/api/product",product);
-app.use("/api/crop",crop);
+// Multer Storage Configuration
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "uploads/"); // Save files in the uploads/ directory
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}-${file.originalname}`); // Unique file names
+    }
+});
+const upload = multer({ storage });
 
-const PORT = process.env.PORT;
+// API Routes
+app.use("/api/farmer", farmerRoutes);
+app.use("/api/consumer", consumerRoutes);
+app.use("/api/crop", cropRoutes);
+app.use("/api/product", productRoutes);
 
+// File Upload Route
+app.post("/api/upload", upload.single("image"), (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ message: "No file uploaded" });
+    }
+    res.status(200).json({ imageUrl: `/uploads/${req.file.filename}` });
+});
+
+const PORT = process.env.PORT || 5000;
+
+// Start Server after Connecting to Database
 connectDb().then(() => {
-    app.listen(PORT, ()=> {
+    app.listen(PORT, () => {
         seedCrops();
-        console.log(`server is running at port:  ${PORT}`);
+        console.log(`Server running on port: ${PORT}`);
     });
 });
