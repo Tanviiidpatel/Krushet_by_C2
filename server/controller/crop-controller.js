@@ -1,5 +1,7 @@
 import Crop from "../model/crop-model.js"; 
 import Product from "../model/product-model.js";
+import fs from "fs";
+import path from "path";
 
 export const searchCrops = async (req, res) => {
     try {
@@ -21,22 +23,31 @@ export const searchCrops = async (req, res) => {
 
 export const postCropListing = async (req, res) => {
     try {
-        const { productname, producttype, productquantity, productprize, farmerId } = req.body;
-        const imageUrl = req.file ? `/uploads/${req.file.filename}` : ""; // Fixed syntax
+        console.log("Received Data:", req.body); // Log received data
 
-        // Ensure the farmer exists
-        if (!farmerId) {
-            return res.status(400).json({ message: "Farmer ID is required" });
+        const { productname, producttype, productquantity, price, farmerId } = req.body;
+
+        if (!productname || !producttype || !productquantity || !price || !farmerId) {
+            return res.status(400).json({ message: "All fields are required" });
         }
 
-        // Create and save the product
+        if (!req.file) {
+            return res.status(400).send("File is required");
+        }
+
+        const date = Date.now();
+        const fileExtension = path.extname(req.file.originalname);
+        const fileName = `uploads/listings/${date}${fileExtension}`;
+        fs.renameSync(req.file.path, fileName);
+
         const product = new Product({
+            productId: new Date().getTime().toString(),
             productname,
             producttype,
             productquantity,
-            productprize,
+            productprize: price, // Ensure this matches frontend
             farmerId,
-            imageUrl
+            imageUrl: `/${fileName}`
         });
 
         await product.save();
@@ -44,7 +55,7 @@ export const postCropListing = async (req, res) => {
         res.status(201).json({ message: "Listing posted successfully!", product });
 
     } catch (error) {
-        console.error(error);
+        console.error("Error in postCropListing:", error);
         res.status(500).json({ error: "Failed to post listing" });
     }
 };

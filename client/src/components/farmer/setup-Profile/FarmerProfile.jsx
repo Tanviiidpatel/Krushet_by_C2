@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaArrowLeftLong, FaTrash, FaPlus } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { LIST_PRODUCT_ROUTE } from "../../../utils/constants";
+
 
 const FarmerProfile = () => {
   const navigate = useNavigate();
