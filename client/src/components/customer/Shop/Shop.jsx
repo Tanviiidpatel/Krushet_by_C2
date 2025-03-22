@@ -6,7 +6,7 @@ const Shop = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* 🛒 Hero Section */}
-      <div className="relative w-full h-64 flex items-center justify-center bg-cover bg-center bg-green-500 mt-10">
+      <div className="relative w-full h-64 flex items-center justify-center bg-cover bg-center bg-gray-300 mt-10">
         <div className="absolute inset-0 flex flex-col items-center justify-center text-black px-4">
           <h1 className="text-4xl font-bold">Shop Fresh & Organic</h1>
           <form className="mt-4 flex w-full max-w-md">
@@ -42,7 +42,7 @@ const Shop = () => {
             { id: 4, name: "Cucumber", price: "₹60/kg", image: cucumber },
             { id: 5, name: "Bell Pepper", price: "₹100/kg", image: redBellPepper },
           ].map((product) => (
-            <Link to={`/customer-dashboard/product/${product.id}`} key={product.id} className="group">
+            <Link to={`/consumer/product/${product.id}`} key={product.id} className="group">
               <div className="bg-white shadow-md rounded-lg p-4 flex flex-col items-center group">
                 <img src={product.image} alt={product.name} className="w-28 h-28 object-cover transition-transform group-hover:scale-110" />
                 <h3 className="mt-2 text-lg font-semibold">{product.name}</h3>
@@ -58,7 +58,7 @@ const Shop = () => {
 
       {/* 🔗 View More Button */}
       <div className="text-center my-8">
-         <Link to="/customer-dashboard/all-products">
+         <Link to="/consumer/all-products">
          <button className="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-lg font-semibold">
            View More Products
          </button>

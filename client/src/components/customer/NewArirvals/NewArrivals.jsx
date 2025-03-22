@@ -25,7 +25,7 @@ const NewArrivals = () => {
       <div className="w-full max-w-5xl flex justify-center">
         <div className="grid grid-cols-3 md:grid-cols-6 gap-8">
           {products.map((product) => (
-            <Link to={`/customer-dashboard/product/${product.id}`} key={product.id}>
+            <Link to={`/consumer/product/${product.id}`} key={product.id}>
               <div className="text-center cursor-pointer">
                 <img
                   src={product.image}
