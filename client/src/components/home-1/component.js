@@ -3,6 +3,7 @@ import Footer from "./Footer/Footer";
 import Hero from "./Hero/Hero";
 import Login from "./Login/Investor/Login";
 import Signup from "./SignUp/Investor/SignUp";
+import Homepage from "../../pages/homepage/homepage";
 
 
 export {
@@ -10,5 +11,6 @@ export {
     Hero,
     Footer,
     Login,
-    Signup
+    Signup,
+    Homepage
 }
