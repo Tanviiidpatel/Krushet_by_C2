@@ -14,6 +14,7 @@ import seedCrops from "./seed/crops.js";
 import weatherRoute from "./router/weather-router.js";
 import AiRoutes from "./router/AiRoutes.js";
 import fundingRoutes from "./router/funding-router.js";
+import farmerprofileRoutes from "./router/farmer_profile-router.js";
 
 dotenv.config();
 const app = express();
@@ -38,7 +39,7 @@ app.use("/api/product", productRoutes);
 app.use("api/weather", weatherRoute);
 app.use("/api/ai",AiRoutes);
 app.use("/api/funding", fundingRoutes);
-
+app.use("/api/farmers", farmerprofileRoutes);
 
 
 
