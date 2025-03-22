@@ -46,11 +46,13 @@ export const get_product = async (req, res) => {
     }
 };
 
+
 export const get_all_products = async (req, res) => {
     try {
-        const products = await Product.find().populate("farmerId", "username" , "email");
+        const products = await Product.find()
+            .populate("farmerId", "username email"); // ✅ Correct field reference
+
         res.status(200).json(products);
-        
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Error retrieving all products." });
