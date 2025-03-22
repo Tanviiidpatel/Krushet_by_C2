@@ -1,25 +1,33 @@
 import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema({
-
+    productId: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        required: true 
+    },
     productname: {
         type: String,
-        require: true,
+        required: true,
     },
-    producttype:{
+    producttype: {
         type: String,
-        require: true,
+        required: true,
     },
     productquantity: {
-        type: String,
-        require: true,
+        type: Number,  // Use Number for better calculations
+        required: true,
     },
     productprize: {
-        type: String,
-        require: true,
-    }
+        type: Number,  // Use Number for sorting and calculations
+        required: true,
+    },
+    farmerId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",  // Reference to the User (Farmer)
+        required: true,
+    },
+    imageUrl: { type: String, required: true },
+}, { timestamps: true });
 
-});
-
-const Product = new mongoose.model("Product", productSchema);
+const Product = mongoose.model("Product", productSchema);
 export default Product;
