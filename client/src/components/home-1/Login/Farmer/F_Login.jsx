@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Login = () => {
+const F_Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -12,7 +12,7 @@ const Login = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 bg-white shadow-md rounded-lg">
-        <h2 className="text-2xl font-bold text-center">Login</h2>
+        <h2 className="text-2xl font-bold text-center">Login as farmer</h2>
         <form onSubmit={handleLogin} className="mt-6">
           <div className="mb-4">
             <label className="block text-gray-700">Email</label>
@@ -48,15 +48,19 @@ const Login = () => {
             Login
           </button>
         </form>
-        <p className="mt-4 text-center">
+        <p className="my-4 text-center">
           Don't have an account?{" "}
-          <a href="/signup" className="text-green-600 hover:underline">
+          <a href="/farmer/signup" className="text-green-600 hover:underline">
             Sign up
           </a>
         </p>
+        <div className="flex justify-center items-center gap-5 text-center">
+        <a href="/consumer/login" className="w-[50%] px-4 py-2 mt-4 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-600">Login as Consumer</a>
+        <a href="/investor/login" className="w-[50%] px-4 py-2 mt-4 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-600">Login as Investor</a>
+      </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default F_Login;

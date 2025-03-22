@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const CallToAction = () => {
+const CallToAction_button = () => {
   const navigate = useNavigate();
 
   return (
@@ -28,4 +28,4 @@ const CallToAction = () => {
   );
 };
 
-export default CallToAction;
+export default CallToAction_button;

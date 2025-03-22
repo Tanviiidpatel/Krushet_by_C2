@@ -37,12 +37,9 @@ app.use("/api/crop", cropRoutes);
 app.use("/api/product", productRoutes);
 app.use("api/weather", weatherRoute);
 app.use("/api/ai",AiRoutes);
-<<<<<<< HEAD
 app.use("/api/invest",investmentRoutes);
-=======
 app.use("/api/funding", fundingRoutes);
 app.use("/api/farmers", farmerprofileRoutes);
->>>>>>> 18351500a8edb78c3d01097740e88ebd7fcb1642
 
 
 

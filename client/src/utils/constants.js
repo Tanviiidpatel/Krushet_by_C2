@@ -6,6 +6,9 @@ export const INVESTMENT_AI_ROUTE = `${AI_ROUTES}/investmentRecommendation`;
 
 export const AUTH_ROUTES_REGISTRAION = `${HOST}/api/register/register`;
 
+export const CUSTOMER_ROUTES_REGISRATION = `${HOST}/api/consumer/cregister`;
+export const CUSTOMER_ROUTES_LOGIN = `${HOST}/api/consumer/clogin`;
+
 export const GET_ALL_CROPS = `${HOST}/api/crop/search`;
 export const LIST_CROP_ROUTE = `${HOST}/api/crop/listingcrops`;
 
