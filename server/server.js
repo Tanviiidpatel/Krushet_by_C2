@@ -13,6 +13,7 @@ import productRoutes from "./router/post_product-router.js";
 import seedCrops from "./seed/crops.js";
 import weatherRoute from "./router/weather-router.js";
 import AiRoutes from "./router/AiRoutes.js";
+import fundingRoutes from "./router/funding-router.js";
 
 dotenv.config();
 const app = express();
@@ -45,6 +46,8 @@ app.use("/api/crop", cropRoutes);
 app.use("/api/product", productRoutes);
 app.use("api/weather", weatherRoute);
 app.use("/api/ai",AiRoutes);
+app.use("/api/funding", fundingRoutes);
+
 
 // File Upload Route
 app.post("/api/upload", upload.single("image"), (req, res) => {
