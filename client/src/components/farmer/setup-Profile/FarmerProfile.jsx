@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaArrowLeftLong, FaTrash, FaPlus } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { LIST_PRODUCT_ROUTE } from "../../../utils/constants";
 
 const FarmerProfile = () => {
   const navigate = useNavigate();
@@ -48,9 +49,10 @@ const FarmerProfile = () => {
     profileData.append("subsidies", subsidies);
 
     try {
-      await axios.post("API_PROFILE_SETUP_URL", profileData);
+      const res = await axios.post(LIST_PRODUCT_ROUTE, profileData);
+      console.log(res);
       alert("Profile setup completed successfully!");
-      navigate("/investment-seeking");
+    //   navigate("/investment-seeking");
     } catch (error) {
       console.error("Error saving profile:", error);
       alert("Failed to save profile. Please try again.");

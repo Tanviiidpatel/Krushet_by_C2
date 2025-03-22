@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { INVESTMENT_AI_ROUTE } from "../../utils/constants";
+import { INVESTMENT_AI_ROUTE } from "../../../utils/constants";
 import axios from "axios";
 
 const InvestorFormAi = () => {
@@ -56,9 +56,9 @@ const InvestorFormAi = () => {
         onChange={(e) => setRisk(e.target.value)}
         className="w-full p-2 border rounded mt-1 mb-3 focus:ring-2 focus:ring-green-400"
       >
-        <option value="low">Low Risk (Stable crops)</option>
-        <option value="medium">Medium Risk (Vegetables, pulses)</option>
-        <option value="high">High Risk (Cash crops, exotic)</option>
+        <option value="low">Low Risk</option>
+        <option value="medium">Medium Risk</option>
+        <option value="high">High Risk</option>
       </select>
 
       {/* Investment Duration */}
@@ -98,6 +98,7 @@ const InvestorFormAi = () => {
       >
         <option value="yes">Organic Farming</option>
         <option value="no">Traditional Farming</option>
+        <option value="yes">mixed farming</option>
       </select>
 
       {/* Market Focus */}

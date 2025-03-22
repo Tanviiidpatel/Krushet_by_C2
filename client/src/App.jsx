@@ -1,4 +1,4 @@
-import { InvestorHomepage, InvestorProfile } from "./components/Investor-home/components"
+import { InvestorHomepage, InvestorProfile, InvestorFormAi } from "./components/Investor-home/components"
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Login, Signup, Homepage} from "./components/home-1/component";
 import { AddCrop } from "./pages/Farmer/components";
@@ -18,6 +18,7 @@ function App() {
           <Route path="/investor/profile" element={<InvestorProfile />} />
           <Route path="/farmer/profile" element={<FarmerProfile />}></Route>
           <Route path="/farmer/add-crop" element={<AddCrop />} />
+          <Route path="/investor/investmentAi" element={<InvestorFormAi />} />
         </Routes>
       </Router>
     </>
