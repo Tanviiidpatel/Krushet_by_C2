@@ -39,18 +39,11 @@ app.use("/api/crop", cropRoutes);
 app.use("/api/product", productRoutes);
 app.use("/api/weather", weatherRoute);
 app.use("/api/ai",AiRoutes);
-<<<<<<< HEAD
 app.use("/api/invest",investmentRoutes);
-=======
 app.use("/api/funding", fundingRoutes);
 app.use("/api/farmers", farmerprofileRoutes);
-<<<<<<< HEAD
 app.use("/api/ratings", ratingRoutes);
 app.use("/api/paypal", paypalRoutes);
-=======
->>>>>>> 18351500a8edb78c3d01097740e88ebd7fcb1642
-
->>>>>>> 22793a58a2aaeb86ec6b96d9bcc2a2d40c358091
 
 
 const PORT = process.env.PORT || 5000;
