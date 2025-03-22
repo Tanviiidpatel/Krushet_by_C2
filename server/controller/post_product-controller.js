@@ -48,7 +48,7 @@ export const get_product = async (req, res) => {
 
 export const get_all_products = async (req, res) => {
     try {
-        const products = await Product.find().populate("farmerId", "username email");
+        const products = await Product.find().populate("farmerId", "username" , "email");
         res.status(200).json(products);
         
     } catch (error) {
