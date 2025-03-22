@@ -31,6 +31,7 @@ export const fetchInvestmentRecommendation = async (req, res) => {
                                     "market_demand": "High/Medium/Low",
                                     "climate_suitability": "Best suited for [region]",
                                     "expected_yield": "X tons per acre",
+                                    "market price(in rupees)" X rupees per kg,
                                     "roi": "X% return on investment",
                                     "risk_factors": ["Factor 1", "Factor 2"],
                                     "government_subsidies": "Yes/No"

@@ -4,8 +4,6 @@ import dotenv from "dotenv";
 import cors from "cors";
 import multer from "multer";
 import path from "path";
-
-// Import Routes
 import farmerRoutes from "./router/farmer-router.js";
 import consumerRoutes from "./router/consumer-router.js";
 import cropRoutes from "./router/crop-router.js";
@@ -13,6 +11,7 @@ import productRoutes from "./router/post_product-router.js";
 import seedCrops from "./seed/crops.js";
 import weatherRoute from "./router/weather-router.js";
 import AiRoutes from "./router/AiRoutes.js";
+import investmentRoutes from "./router/investment-routes.js"
 
 dotenv.config();
 const app = express();
@@ -36,6 +35,7 @@ app.use("/api/crop", cropRoutes);
 app.use("/api/product", productRoutes);
 app.use("api/weather", weatherRoute);
 app.use("/api/ai",AiRoutes);
+app.use("/api/invest",investmentRoutes);
 
 
 

@@ -3,7 +3,6 @@ import { FaArrowLeftLong, FaTrash, FaPlus } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-
 const FarmerProfile = () => {
   const navigate = useNavigate();
 
@@ -35,6 +34,7 @@ const FarmerProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const profileData = new FormData();
     profileData.append("email", email);
     profileData.append("fullName", fullName);
@@ -49,10 +49,9 @@ const FarmerProfile = () => {
     profileData.append("subsidies", subsidies);
 
     try {
-      const res = await axios.post(LIST_PRODUCT_ROUTE, profileData);
-      console.log(res);
+      await axios.post("API_PROFILE_SETUP_URL", profileData);
       alert("Profile setup completed successfully!");
-    //   navigate("/investment-seeking");
+      navigate("/investment-seeking");
     } catch (error) {
       console.error("Error saving profile:", error);
       alert("Failed to save profile. Please try again.");
@@ -60,17 +59,17 @@ const FarmerProfile = () => {
   };
 
   return (
-    <div className="h-screen w-screen flex mt-[8vh] justify-center bg-cover bg-center overflow-hidden">
-      <div className="relative z-10 flex items-center w-[75vw] h-auto p-6 rounded-lg bg-white/10 backdrop-blur-md text-white shadow-lg">
+    <div className="h-screen w-screen flex mt-[10vh] justify-center bg-cover bg-center overflow-hidden">
+      <div className="relative z-10 flex items-center w-[70vw] h-[80vh] p-6 rounded-lg bg-white/10 backdrop-blur-md text-white shadow-lg">
         
-        {/* Left Section (Avatar & Logo) */}
+        {/* Left Section (Avatar) */}
         <div className="flex flex-col items-center w-[25%]">
           <FaArrowLeftLong
             className="self-start text-2xl text-black cursor-pointer mb-4"
             onClick={() => navigate(-1)}
           />
 
-          <a className="text-black text-5xl font-extrabold cursor-pointer mb-6">
+          <a className="text-black text-6xl font-extrabold cursor-pointer mb-10">
             Krushet
           </a>
 
@@ -107,11 +106,11 @@ const FarmerProfile = () => {
           </div>
 
           {/* Color Options */}
-          <div className="flex gap-3 mt-4">
+          <div className="flex gap-4 mt-4">
             {colorOptions.map((color, index) => (
               <div
                 key={index}
-                className="w-7 h-7 rounded-full cursor-pointer border-2 border-white hover:scale-110"
+                className="w-8 h-8 rounded-full cursor-pointer border-2 border-white hover:scale-110"
                 style={{ backgroundColor: color }}
                 onClick={() => setAvatarColor(color)}
               ></div>
@@ -121,48 +120,23 @@ const FarmerProfile = () => {
 
         {/* Right Section (Form) */}
         <div className="w-[75%] grid grid-cols-2 gap-4 p-4">
-          <input
-            type="text"
-            disabled
-            value={email}
-            className="col-span-1 text-black p-2 rounded-md border-1 border-black w-[90%]"
-          />
-          <input
-            type="text"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            placeholder="Full Name / Farm Name"
-            className="col-span-1 text-black p-2 rounded-md border-1 border-black w-[100%]"
-          />
-          <textarea
-            rows={2}
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            placeholder="Farm Address"
-            className="col-span-2 text-black p-2 rounded-md border-1 border-black w-full"
-          />
-          <input
-            type="text"
-            value={farmSize}
-            onChange={(e) => setFarmSize(e.target.value)}
-            placeholder="Farm Size (acres/hectares)"
-            className="col-span-1 text-black p-2 rounded-md border-1 border-black w-[90%]"
-          />
-          <select
-            value={farmingType}
-            onChange={(e) => setFarmingType(e.target.value)}
-            className="col-span-1 text-black p-2 rounded-md border-1 border-black w-[100%]"
-          >
+          <input type="text" disabled value={email} className="text-black p-2 rounded-md border-1 border-black" />
+          <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="Full Name / Farm Name" className="text-black p-2 rounded-md border-1 border-black" />
+          <textarea rows={1} cols={5} value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Farm Address" className="text-black p-2 rounded-md border-1 border-black" />
+          <input type="text" value={farmSize} onChange={(e) => setFarmSize(e.target.value)} placeholder="Farm Size (acres/hectares)" className="text-black p-2 rounded-md border-1 border-black" />
+          <select value={farmingType} onChange={(e) => setFarmingType(e.target.value)} className="text-black p-2 rounded-md border-1 border-black">
             <option value="">Select Farming Type</option>
             <option value="Organic">Organic</option>
             <option value="Traditional">Traditional</option>
             <option value="Mixed">Mixed</option>
           </select>
-          <input type="text" value={mainCrops} onChange={(e) => setMainCrops(e.target.value)} placeholder="Main Crops Grown" className="text-black p-2 rounded-md border-1 border-black w-[90%]" />
-          <input type="number" value={experience} onChange={(e) => setExperience(e.target.value)} placeholder="Years of Experience" className="text-black p-2 rounded-md border-1 border-black w-[90%]" />
+          <input type="text" value={mainCrops} onChange={(e) => setMainCrops(e.target.value)} placeholder="Main Crops Grown" className="text-black p-2 rounded-md border-1 border-black" />
+          <input type="number" value={experience} onChange={(e) => setExperience(e.target.value)} placeholder="Years of Experience" className="text-black p-2 rounded-md border-1 border-black" />
+          <input type="number" value={workers} onChange={(e) => setWorkers(e.target.value)} placeholder="Number of Workers" className="text-black p-2 rounded-md border-1 border-black" />
+          <input type="text" value={registration} onChange={(e) => setRegistration(e.target.value)} placeholder="Business Registration (optional)" className="text-black p-2 rounded-md border-1 border-black" />
 
-          <button onClick={handleSubmit} className="col-span-2 mt-6 px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-md w-full text-lg">
-            Save Profile
+          <button onClick={handleSubmit} className="col-span-2 mt-6 px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md w-full text-lg">
+            Save
           </button>
         </div>
       </div>
