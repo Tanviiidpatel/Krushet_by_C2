@@ -5,8 +5,8 @@ import validate from "../middleware/validate-middleware.js";
 
 const router = express.Router();
 
-router.route("/cregister").post(validate(consumer_signupSchema),consumercontroller.c_register);
-router.route("/clogin").post(validate(consumer_loginSchema),consumercontroller.c_login);
+router.route("/cregister").post(consumercontroller.c_register);
+router.route("/clogin").post(consumercontroller.c_login);
 
 
 export default router; 

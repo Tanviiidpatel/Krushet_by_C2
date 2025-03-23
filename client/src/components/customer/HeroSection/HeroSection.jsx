@@ -23,7 +23,7 @@ const HeroSection = () => {
         <p className="text-lg sm:text-xl mt-4 opacity-90 max-w-2xl">
           Support local farmers and enjoy naturally grown, fresh produce.
         </p>
-        <a className="mt-6 px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition">
+        <a  href="/consumer/shop"className="mt-6 px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition">
           Shop Now
         </a>
       </div>

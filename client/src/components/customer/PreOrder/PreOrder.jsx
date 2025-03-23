@@ -1,58 +1,119 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { productsData } from "../../../data/productsData";
+import { GET_ALL_FARMERS } from "../../../utils/constants";
 
 const Preorder = () => {
+  const navigate = useNavigate();
+  
+  const [preorderData, setPreorderData] = useState({
+    product: "",
+    quantity: "",
+    farmerId: "", 
+  });
+  const [farmers,setFarmers] = useState([]);
+  const [selectedFarmer,setSelectedFarmer] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleChange = (e) => {
+    setPreorderData({ ...preorderData, [e.target.name]: e.target.value });
+  };
+
+  useEffect(() => {
+    const getAllFarmerData = async () => {
+      try{
+        const res = await axios.get(GET_ALL_FARMERS);
+        setFarmers(res.data);
+      } catch(err){
+        console.log(err.message)
+      }
+    }
+  },[])
+
+  // 🚀 Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!preorderData.product || !preorderData.quantity) {
+      setMessage("Please fill out all fields.");
+      return;
+    }
+
+    try {
+      const user = JSON.parse(localStorage.getItem("user")); // Assuming user info is stored
+      const response = await axios.post("http://localhost:5000/api/preorders", {
+        ...preorderData,
+        consumerId: user._id, // Assuming user is logged in
+      });
+
+      if (response.status === 201) {
+        setMessage("Preorder placed successfully! ✅");
+        setTimeout(() => navigate("/consumer/preorders"), 2000);
+      }
+    } catch (error) {
+      console.error("Error placing preorder:", error);
+      setMessage("Failed to place preorder. Try again.");
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      
+    <div className="min-h-screen bg-gray-50 pb-10">
       {/* 🌟 Hero Section */}
-      <div className="relative w-full h-80 flex items-center justify-center bg-green-500 text-white text-center px-4 mt-10">
+      <div className="relative w-full h-80 flex items-center justify-center bg-green-100 text-white text-center px-4">
         <div>
-          <h1 className="text-5xl font-bold">Preorder Fresh & Exclusive!</h1>
-          <p className="mt-2 text-lg text-gray-100">Be the first to enjoy upcoming seasonal produce.</p>
-          <button className="mt-4 bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200">
-            View Preorders
-          </button>
+          <h1 className="text-5xl font-bold text-green-800">Preorder Fresh & Exclusive!</h1>
+          <p className="mt-2 text-lg text-gray-700">Be the first to enjoy upcoming seasonal produce.</p>
         </div>
       </div>
 
-      {/* 📢 Why Preorder Section */}
-      <section className="py-12 px-6 text-center">
-        <h2 className="text-3xl font-semibold text-gray-800">Why Preorder?</h2>
-        <p className="text-lg text-gray-600 mt-2 max-w-2xl mx-auto">
-          Secure your favorite seasonal produce before they sell out! Enjoy the freshest organic items, delivered directly from farms.
-        </p>
-        <div className="mt-6 flex justify-center space-x-6">
-          <div className="p-6 bg-white shadow-lg rounded-lg w-64">
-            <h3 className="text-xl font-semibold text-green-600">🌱 Farm Fresh</h3>
-            <p className="text-gray-600 mt-2">Preorder ensures you get the freshest produce directly from local farms.</p>
-          </div>
-          <div className="p-6 bg-white shadow-lg rounded-lg w-64">
-            <h3 className="text-xl font-semibold text-green-600">🚀 Guaranteed Delivery</h3>
-            <p className="text-gray-600 mt-2">Reserve your order now and get it delivered at the best time.</p>
-          </div>
-        </div>
-      </section>
+      {/* 📝 Preorder Form */}
+      <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-lg mt-8">
+        <h2 className="text-2xl font-semibold text-center text-green-700">Place Your Preorder</h2>
 
-      {/* 🌿 Upcoming Products Grid */}
-      <section className="py-12 px-6">
-        <h2 className="text-3xl font-semibold text-center text-gray-800">Upcoming Seasonal Produce</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 mt-8">
-          {productsData.map(({ id, name, price, image }) => (
-            <Link to={`/customer-dashboard/product/${id}`} key={id}>
-              <div className="bg-white shadow-md rounded-lg p-6 flex flex-col items-center cursor-pointer">
-                <img src={image} alt={name} className="w-28 h-28 object-cover transition-transform hover:scale-110" />
-                <h3 className="mt-2 text-xl font-semibold">{name}</h3>
-                <p className="text-green-600 font-semibold">₹{price}</p>
-                <button className="mt-3 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium">
-                  Preorder Now
-                </button>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
+        {message && <p className="text-center mt-2 text-red-500">{message}</p>}
+
+
+
+        <form onSubmit={handleSubmit} className="mt-4">
+          {/* 📌 Select Product */}
+          <label className="block text-gray-700 font-medium mb-2">Select Product:</label>
+          <input
+            name="product"
+            value={preorderData.product}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+            required
+           />
+            
+          <label className="block text-gray-700 font-medium mt-4 mb-2">Quantity (kg):</label>
+          <input
+            type="number"
+            name="quantity"
+            value={preorderData.quantity}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+            required
+            min="1"
+          />
+
+          <label className="block text-gray-700 font-medium mt-4 mb-2">Farmer ID</label>
+          <input
+            type="text"
+            name="farmerId"
+            value={preorderData.farmerId}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+          />
+
+          <button
+            type="submit"
+            className="mt-6 w-full bg-green-500 text-white font-semibold py-2 rounded-lg hover:bg-green-600 transition"
+          >
+            Place Preorder
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

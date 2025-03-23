@@ -15,6 +15,8 @@ export const LIST_CROP_ROUTE = `${HOST}/api/crop/listingcrops`;
 export const GET_ALL_LISTING = `${HOST}/api/product/all-products`
 export const GET_MORE_FROM_FARMER = `${HOST}/api/product/seller`
 
+export const GET_ALL_FARMERS = `${HOST}/api/pre-orders/allFarmerDatas`
+
 export const CROP_TYPES = ["Fruit", "Vegetable", "Grain", "Herb", "Dry Fruit"];
 export const PRICE_RANGES = [
   [0, 100],

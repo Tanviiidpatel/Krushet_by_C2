@@ -20,6 +20,7 @@ const C_Signup = () => {
             email: email,
             password: password
         });
+        console.log(res);
         if(res.status === 201){
             navigate("/consumer");
         }

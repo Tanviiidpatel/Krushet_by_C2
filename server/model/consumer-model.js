@@ -17,7 +17,7 @@ const consumerSchema = new mongoose.Schema({
     },
     phone: {
         type: String,
-        require: true,
+        require: false,
     },
 });
 
@@ -31,7 +31,7 @@ consumerSchema.pre("save", async function (next){
 
     try {
         const slatRound = await bcrypt.genSalt(10);
-        const hash_password = await bcrypt.hash(consumer.password, slatRound);
+        const hash_password = bcrypt.hash(consumer.password, slatRound);
         consumer.password = hash_password;
     } catch (error) {
         next(error);
