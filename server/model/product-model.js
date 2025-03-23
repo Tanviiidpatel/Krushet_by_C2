@@ -33,7 +33,12 @@ const ProductSchema = new mongoose.Schema({
     ratings: [{ 
         userId: mongoose.Schema.Types.ObjectId, 
         rating: Number 
-    }]
+    }],
+    status: { 
+        type: String, 
+        enum: ["available", "sold"], 
+        default: "available" 
+    }
 });
 
 const Product = mongoose.model("Product", ProductSchema);

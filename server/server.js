@@ -17,6 +17,8 @@ import farmerprofileRoutes from "./router/farmer_profile-router.js";
 import ratingRoutes from "./router/rating-router.js";
 import paypalRoutes from "./router/paypal-routes.js";
 import preorderRoutes from "./router/pre_order-router.js";
+import cartRoutes from "./router/cart-router.js";
+import notificationRoutes from "./router/notification-router.js";
 
 dotenv.config();
 const app = express();
@@ -46,6 +48,8 @@ app.use("/api/farmers", farmerprofileRoutes);
 app.use("/api/ratings", ratingRoutes);
 app.use("/api/paypal", paypalRoutes);
 app.use("/api/pre-orders", preorderRoutes);
+app.use("/api/cart", cartRoutes);
+app.use("/api/notifications", notificationRoutes);
 
 
 const PORT = process.env.PORT || 5000;
