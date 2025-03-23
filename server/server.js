@@ -16,6 +16,7 @@ import fundingRoutes from "./router/funding-router.js";
 import farmerprofileRoutes from "./router/farmer_profile-router.js";
 import ratingRoutes from "./router/rating-router.js";
 import paypalRoutes from "./router/paypal-routes.js";
+import preorderRoutes from "./router/pre_order-router.js";
 
 dotenv.config();
 const app = express();
@@ -44,6 +45,7 @@ app.use("/api/funding", fundingRoutes);
 app.use("/api/farmers", farmerprofileRoutes);
 app.use("/api/ratings", ratingRoutes);
 app.use("/api/paypal", paypalRoutes);
+app.use("/api/pre-orders", preorderRoutes);
 
 
 const PORT = process.env.PORT || 5000;
