@@ -8,7 +8,8 @@ import {
     price_sorting_ascending,
     price_sorting_descending,
     name_sorting_ascending,
-    name_sorting_descending
+    name_sorting_descending,
+    moreFromThisSeller
 } from "../controller/post_product-controller.js";
 
 const router = express.Router();
@@ -17,6 +18,7 @@ router.post("/addCrop", authMiddleware, post_product); // Only logged-in farmers
 router.post("/update",authMiddleware,update_product);
 router.get("/my-products", authMiddleware, get_product); // Get logged-in farmer's products
 router.get("/all-products", get_all_products); // Admin/public can see all products
+router.get("/seller/:farmerId/:excludeProductId",moreFromThisSeller)
 // router.get("get-product-by-id")
 
 // Sorting Routes

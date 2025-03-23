@@ -132,3 +132,20 @@ export const name_sorting_descending = async (req, res) => {
         res.status(500).json({ error: "Error sorting products by name (descending)." });
     }
 };
+
+export const moreFromThisSeller = async (req, res) => {
+    try {
+      const { farmerId, excludeProductId } = req.params;
+  
+      // 🔍 Find all products by this farmer, excluding the current product
+      const products = await Product.find({
+        farmerId: farmerId,
+        productId: { $ne: excludeProductId }, // Exclude the current product
+      });
+  
+      res.json(products);
+    } catch (error) {
+      console.error("Error fetching seller products:", error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  }

@@ -28,7 +28,7 @@ const FeaturesGrid = () => {
           <p className="text-gray-600 mt-2 text-center">
             Join our community of small farm supporters and get healthy products for your family!
           </p>
-          <Link to="/customer-dashboard/shop">
+          <Link to="/consumer/shop">
         <button className="mt-6 px-6 py-3 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600">
           Get started
         </button>

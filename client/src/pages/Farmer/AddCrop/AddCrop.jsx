@@ -43,51 +43,48 @@ const AddCrop = () => {
   };
 
   const handlePostListing = async () => {
-        if (!selectedCrop || !cropType || !quantity || !price || !image) {
-            alert("Please fill in all fields and upload an image before posting.");
-            return;
-        }
-    
-        setLoading(true);
-        setSuccessMessage("");
-    
-        const formData = new FormData();
-        formData.append("productname", selectedCrop.name);
-        formData.append("producttype", cropType);
-        formData.append("productquantity", quantity);
-        formData.append("price", price); // Ensure this is "price" (matches backend)
-        formData.append("farmerId", localStorage.getItem("farmerId") || "67de679bf13f3ca2a43669db");
-        formData.append("image", image);
-    
-        try {
-            const response = await axios.post(
-                "http://localhost:2203/api/crop/listingcrops", // Ensure correct endpoint
-                formData,
-                { headers: { "Content-Type": "multipart/form-data" } }
-            );
-    
-            console.log(response);
-    
-            setSuccessMessage("Listing posted successfully!");
-            setSelectedCrop(null);
-            setCropType("");
-            setQuantity("");
-            setPrice("");
-            setSearchedCrop("");
-            setCrops([]);
-            setImage(null);
-            setPreviewImage("");
-    
-        } catch (error) {
-            console.error("Error posting listing:", error);
-            alert("Failed to post listing. Please try again.");
-        } finally {
-            setLoading(false);
-        }
-    };
-    
+    if (!selectedCrop || !cropType || !quantity || !price || !image) {
+      alert("Please fill in all fields and upload an image before posting.");
+      return;
+    }
 
-  
+    setLoading(true);
+    setSuccessMessage("");
+
+    const formData = new FormData();
+    formData.append("productname", selectedCrop.name);
+    formData.append("producttype", cropType);
+    formData.append("productquantity", quantity);
+    formData.append("price", price);
+    formData.append(
+      "farmerId",
+      localStorage.getItem("farmerId") || "67de679bf13f3ca2a43669db"
+    );
+    formData.append("image", image);
+
+    try {
+      const response = await axios.post(LIST_CROP_ROUTE, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      console.log(response);
+
+      setSuccessMessage("Listing posted successfully!");
+      setSelectedCrop(null);
+      setCropType("");
+      setQuantity("");
+      setPrice("");
+      setSearchedCrop("");
+      setCrops([]);
+      setImage(null);
+      setPreviewImage("");
+    } catch (error) {
+      console.error("Error posting listing:", error);
+      alert("Failed to post listing. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="p-4 max-w-md mx-auto bg-white shadow-md rounded-md">
@@ -101,7 +98,9 @@ const AddCrop = () => {
       {/* Step 1: Search & Select Crop */}
       {!selectedCrop ? (
         <>
-          <h2 className="text-lg font-semibold mb-2">step 1: Search & Select a Crop</h2>
+          <h2 className="text-lg font-semibold mb-2">
+            step 1: Search & Select a Crop
+          </h2>
           <input
             type="text"
             value={searchedCrop}
