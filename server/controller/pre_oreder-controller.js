@@ -1,4 +1,5 @@
 import PreOrder from "../model/pre_order-model.js";
+import User from "../model/farmer-model.js";
 
 // Create a pre-order
 export const createPreOrder = async (req, res) => {
@@ -35,7 +36,8 @@ export const getPreOrderById = async (req, res) => {
 // Get pre-orders by farmer ID
 export const getPreOrdersByFarmer = async (req, res) => {
   try {
-    const { farmerId } = req.params; // Get farmerId from URL params
+    
+    const { farmerId } = req.body; // Get farmerId from URL params
 
     // Fetch pre-orders for the given farmer
     const preOrders = await PreOrder.find({ farmerId }).populate("consumerId", "name email"); // Populate consumer details
@@ -60,3 +62,11 @@ export const deletePreOrder = async (req, res) => {
   }
 };
 
+export const getallfarmers = async (req,res) => {
+  try {
+    const user = await User.find();
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ error: err.message });
+  }
+}
