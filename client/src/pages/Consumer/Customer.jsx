@@ -11,7 +11,7 @@ const Customer = () => {
   return (
     <div className="bg-gray-100 min-h-screen">
       <Navbar />
-      <div className="bg-gradient-to-b from-blue-100 via-gray-100 to-gray-200 ">
+      <div className="bg-green-100 ">
         <HeroSection />
         <NewArrivals />
         <FeaturesGrid />
