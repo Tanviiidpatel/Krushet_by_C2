@@ -20,7 +20,6 @@ import {
   FeaturePage,
   ContactPage,
 } from "./components/home-1/component";
-import { AddCrop } from "./pages/Farmer/components";
 import { FarmerProfile } from "./components/farmer/components";
 import Demo from "./pages/Farmer/demo/Demo";
 import DemoDetails from "./pages/Farmer/demo/DemoDetails";
@@ -39,6 +38,14 @@ import AllProducts from "./components/customer/Shop/AllProducts";
 import MyOrders from "./components/customer/Orders/MyOrders";
 import Cart from "./components/customer/Cart/Cart";
 import Checkout from "./components/customer/Checkout/Checkout";
+import AddCrop from "./pages/Farmer/AddCrop/AddCrop";
+import InventoryPage from "./pages/Farmer_dashboard_page/Inventory";
+import EarningsPage from "./pages/Farmer_dashboard_page/EarningsPage";
+import GuideSection from "./components/farmer_dashboard/GuideSection";
+import MarketChart from "./components/farmer_dashboard/MarketCart";
+import MarketAnalysis from "./components/farmer_dashboard/MarketAnalysis";
+import Navbar from "./components/farmer_dashboard/Navbar";
+import Farmer_dash_hero from "./components/farmer_dashboard/Farmer_dash_hero";
 
 function App() {
   const { userInfo } = useAppStore();
@@ -77,6 +84,32 @@ function App() {
 
           <Route path="/farmer/login" element={<F_Login />} />
           <Route path="/farmer/signup" element={<F_Signup />} />
+          <Route
+          path="/farmer/dashboard"
+          element={
+            <div>
+             
+              <Navbar />
+              <Farmer_dash_hero />
+              <GuideSection />
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 ">
+             
+                <div className="w-8px">
+                  <MarketAnalysis />
+                </div>
+                <div className="w-8px">
+                  <MarketChart />
+                </div>
+              </div>
+              <InventoryPage />
+              <AddCrop />
+              <EarningsPage />
+            </div>
+          }
+        />
+
+
           <Route path="/investor/login" element={<I_Login />} />
           <Route path="/investor/signup" element={<I_Signup />} />
           <Route path="/investor/profile" element={<InvestorProfile />} />

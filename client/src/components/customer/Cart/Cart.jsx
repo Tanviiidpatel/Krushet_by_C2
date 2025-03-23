@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { HOST } from "../../../utils/constants";
+import { CONFIRM_PAYMENT, HOST } from "../../../utils/constants";
 import { MdOutlineDelete } from "react-icons/md";
 import { FaArrowLeft } from "react-icons/fa";
+import axios from "axios";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -31,6 +32,28 @@ const Cart = () => {
     (total, item) => total + item.productprize,
     0
   );
+
+  const handleCheckout = (e) => {
+    console.log("hi");
+    e.preventDefault();
+      const checkout = async () => {
+        try{
+          const res = await axios.post(CONFIRM_PAYMENT,{
+            productId: "1742653540842",
+            farmerId: "67de679bf13f3ca2a43669db",
+            consumerId: "67df85ccacecd6ae7956fb1a",
+            name: "banana"
+          });
+          
+          console.log(res.data);
+        }
+
+        catch(err){
+          console.log(err.message)
+        }
+        checkout();
+      }
+  }
 
   return (
     <div className="min-h-screen bg-green-100 py-10 px-6">
@@ -84,7 +107,7 @@ const Cart = () => {
                 Clear Cart
               </button>
               <button
-                onClick={() => navigate("/checkout", { state: { cart } })}
+                onClick={handleCheckout}
                 className="px-6 py-3 bg-green-500 text-white font-semibold rounded-full hover:bg-green-600 transition"
               >
                 Proceed to Checkout
