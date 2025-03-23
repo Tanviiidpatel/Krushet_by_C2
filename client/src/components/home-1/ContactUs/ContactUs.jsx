@@ -1,83 +1,65 @@
 import React from 'react';
+import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
 
 const ContactUs = () => {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Get in Touch with Us
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            We'd love to hear from you! Whether you have a question about our services, pricing, or anything else, our team is ready to answer all your questions.
+    <div className="min-h-screen flex items-center justify-center px-6 py-12 bg-gradient-to-r from-green-200 to-green-400">
+      <div className="bg-white shadow-xl rounded-lg overflow-hidden w-full max-w-5xl p-10">
+        <div className="text-center mb-8">
+          <h2 className="text-4xl font-bold text-gray-900">Get in Touch</h2>
+          <p className="mt-3 text-gray-600 text-lg">
+            We'd love to hear from you! Reach out with any questions.
           </p>
         </div>
-        <form className="mt-8 space-y-6" action="#" method="POST">
-          <input type="hidden" name="remember" value="true" />
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label htmlFor="name" className="sr-only">
-                Full Name
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                autoComplete="name"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
-                placeholder="Full Name"
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
-                placeholder="Email address"
-              />
-            </div>
-            <div>
-              <label htmlFor="message" className="sr-only">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows="4"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
-                placeholder="Your Message"
-              ></textarea>
-            </div>
-          </div>
 
-          <div>
+        {/* Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Form Section */}
+          <form className="space-y-6">
+            <input
+              type="text"
+              name="name"
+              placeholder="Full Name"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-gray-900 shadow-sm"
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-gray-900 shadow-sm"
+              required
+            />
+            <textarea
+              name="message"
+              rows="4"
+              placeholder="Your Message"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-gray-900 shadow-sm"
+              required
+            ></textarea>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+              className="w-full py-3 px-6 bg-yellow-600 text-white font-semibold rounded-lg shadow-md hover:bg-yellow-700 transition duration-300 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2"
             >
               Send Message
             </button>
+          </form>
+
+          {/* Contact Info */}
+          <div className="flex flex-col justify-center space-y-6">
+            <div className="flex items-center space-x-4">
+              <FaEnvelope className="text-yellow-600 text-2xl" />
+              <span className="text-gray-900 text-lg font-medium">info@youragristartup.com</span>
+            </div>
+            <div className="flex items-center space-x-4">
+              <FaPhoneAlt className="text-yellow-600 text-2xl" />
+              <span className="text-gray-900 text-lg font-medium">+1 (234) 567-890</span>
+            </div>
+            <div className="flex items-center space-x-4">
+              <FaMapMarkerAlt className="text-yellow-600 text-2xl" />
+              <span className="text-gray-900 text-lg font-medium">123 Agriculture Lane, Farmville, USA</span>
+            </div>
           </div>
-        </form>
-        <div className="mt-8 text-center text-gray-600">
-          <p>Or reach us directly at:</p>
-          <p className="mt-2">
-            <strong>Email:</strong> info@youragristartup.com
-          </p>
-          <p className="mt-1">
-            <strong>Phone:</strong> +1 (234) 567-890
-          </p>
-          <p className="mt-1">
-            <strong>Address:</strong> 123 Agriculture Lane, Farmville, USA
-          </p>
         </div>
       </div>
     </div>

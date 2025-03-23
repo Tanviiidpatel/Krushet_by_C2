@@ -1,8 +1,7 @@
-import React from "react";
-
+import {farmers,buyers,investor} from "../../../assets/images"
 const keyFeatures = [
   {
-    image: "/assets/images/farmers.webp",
+    image: farmers,
     title: "Farmers",
     features: [
       "🌱 Add & Manage Crops",
@@ -11,7 +10,7 @@ const keyFeatures = [
     ],
   },
   {
-    image: "/assets/images/buyers.webp",
+    image: buyers,
     title: "Buyers",
     features: [
       "🔍 Find Surplus & Organic Crops",
@@ -20,7 +19,7 @@ const keyFeatures = [
     ],
   },
   {
-    image: "/assets/images/ngos.webp",
+    image: investor,
     title: "NGOs & Investors",
     features: [
       "💵 Fund Farmers & Purchase Crops",
