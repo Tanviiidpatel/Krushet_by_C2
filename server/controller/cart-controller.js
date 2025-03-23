@@ -101,39 +101,45 @@ export const clearCart = async (req, res) => {
 };
 
 export const checkout = async (req, res) => {
-    try {
-      const { consumerId } = req.body;
-      const cart = await Cart.findOne({ consumerId }).populate("products.productId");
-  
-      if (!cart || cart.products.length === 0) {
-        return res.status(400).json({ message: "Cart is empty" });
-      }
-  
-      for (const cartItem of cart.products) {
-        const product = await Product.findById(cartItem.productId);
-        
-        if (!product || product.status === "sold") {
-          return res.status(400).json({ message: `Product ${product.name} is no longer available` });
-        }
-  
-        // Update product status to "sold"
-        product.status = "sold";
-        await product.save();
-  
-        // Send notification to the farmer
-        const notification = new Notification({
-          farmerId: product.farmerId,
-          message: `Your product '${product.name}' has been purchased.`,
-        });
-  
-        await notification.save();
-      }
-  
-      // Clear cart after purchase
-      await Cart.findOneAndDelete({ consumerId });
-  
-      res.status(200).json({ message: "Purchase successful, farmer notified!" });
-    } catch (error) {
-      res.status(500).json({ message: "Checkout failed", error });
+  try {
+    const { consumerId } = req.body; // The buyer's ID
+    const cart = await Cart.findOne({ consumerId }).populate("products.productId");
+
+    if (!cart || cart.products.length === 0) {
+      return res.status(400).json({ message: "Cart is empty" });
     }
+
+    // Process each product in the cart
+    for (const cartItem of cart.products) {
+      const product = await Product.findById(cartItem.productId);
+
+      if (!product || product.status === "sold") {
+        return res.status(400).json({ message: `Product ${product.name} is no longer available` });
+      }
+
+      // Mark product as sold
+      product.status = "sold";
+      await product.save();
+
+      // Send notification to the farmer (seller)
+      await Notification.create({
+        userId: product.farmerId,
+        message: `Your product '${product.name}' has been sold! 🎉`,
+      });
+
+      // Send notification to the buyer (consumer)
+      await Notification.create({
+        userId: consumerId,
+        message: `Your product '${product.name}' is on the way! 🚚`,
+      });
+    }
+
+    // Clear cart after checkout
+    await Cart.findOneAndDelete({ consumerId });
+
+    // Simulated Payment Success Response
+    res.status(200).json({ message: "Payment successful! Notifications sent." });
+  } catch (error) {
+    res.status(500).json({ message: "Checkout failed", error });
+  }
 };
