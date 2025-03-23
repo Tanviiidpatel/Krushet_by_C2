@@ -61,18 +61,18 @@ function App() {
           <Route path="/consumer/login" element={<C_Login />} />
 
           <Route path="/consumer" element={<CustomerLayout />}>
-            <Route index element={<Customer />} />{" "}
+            <Route index element={<Customer />} />
             {/* ✅ Correct: Renders at /customer-dashboard */}
             <Route path="shop" element={<Shop />} />
             <Route path="preorder" element={<PreOrder />} />
             <Route path="in-season-now" element={<InSeasonNow />} />
             <Route path="product/:id" element={<ProductDetail />} />
-            <Route path="all-products" element={<AllProducts />} />{" "}
-            {/* ✅ Relative path */}
+            <Route path="all-products" element={<AllProducts />} />            
           </Route>
+          
 
           <Route path="/orders" element={<MyOrders />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/consumer/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
 
           <Route path="/farmer/login" element={<F_Login />} />

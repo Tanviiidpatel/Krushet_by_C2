@@ -153,6 +153,7 @@ const AddCrop = () => {
             <option value="Vegetable">Vegetable</option>
             <option value="Grain">Grain</option>
             <option value="Herb">Herb</option>
+            <option value="Dry Fruit">Dry Fruit</option>
           </select>
 
           {/* Step 3: Enter Quantity */}
